@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "sixfix",
+    "name": "SixFix",
+    "description": "Some small additions to 1.6.4",
+    "version": "0.0.1",
+    "mcversion": "1.6.4",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["Jeed/JeedRB"],
+    "credits": "Jeed is so cool",
+    "logoFile": "logo.png",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

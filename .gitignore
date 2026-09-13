@@ -1,0 +1,25 @@
+# normal stuff
+.gradle/
+build/
+bin/
+out/
+.idea/
+.java/
+
+*.iml
+*.iws
+*.ipr
+
+# assets i can't distribute obviously
+run/
+assets/
+lib/
+libraries/
+versions/
+natives/
+*.jar
+*.zip
+
+# logs and whatever
+*.log
+*.txt
