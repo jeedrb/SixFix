@@ -33,7 +33,7 @@ public class SixFixUtilKeyHandler extends KeyHandler {
 
             if (pressed == SixFixClientProxy.bindPickBetter) {
                 SixFixPickBlock.pickBetter();
-                System.out.println("hi");
+//                System.out.println("hi");
             }
         }
     }
