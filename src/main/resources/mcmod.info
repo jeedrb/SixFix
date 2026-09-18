@@ -3,7 +3,7 @@
     "modid": "sixfix",
     "name": "SixFix",
     "description": "Some small additions to 1.6.4",
-    "version": "0.0.1",
+    "version": "0.5.0",
     "mcversion": "1.6.4",
     "url": "",
     "updateUrl": "",

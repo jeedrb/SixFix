@@ -29,6 +29,7 @@ public class SixFixHotbarKeyHandler extends KeyHandler {
                 for (int i = 0; i < 9; i++) {
                     if (pressed == SixFixClientProxy.hotbarBinds[i]) {
                         theCraft.thePlayer.inventory.currentItem = i;
+//                        theCraft.playerController.syncCurrentPlayItem();
                         break;
                     }
                 }

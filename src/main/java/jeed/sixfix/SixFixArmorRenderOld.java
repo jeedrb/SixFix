@@ -9,6 +9,9 @@ import net.minecraftforge.event.ForgeSubscribe;
 
 
 // couldn't get this to work lol idk
+// this was me trying the approach from another mod https://github.com/flowerinsnowdh/HideArmour
+// because the way it works looked insane
+
 public class SixFixArmorRenderOld {
     private ItemStack[] armorBuffer;
 

@@ -27,8 +27,13 @@ public class SixFixUtilKeyHandler extends KeyHandler {
             if (pressed == SixFixClientProxy.bindF3 && pressed.keyCode != 61) // toggle debug info if original F3 isn't pressed
                 theCraft.gameSettings.showDebugInfo = !theCraft.gameSettings.showDebugInfo;
 
-            if (pressed == SixFixClientProxy.bindArmor) {
+            if (pressed == SixFixClientProxy.bindArmor) { // run the armor toggle function in the other room
                 SixFixConfig.toggleArmor();
+            }
+
+            if (pressed == SixFixClientProxy.bindPickBetter) {
+                SixFixPickBlock.pickBetter();
+                System.out.println("hi");
             }
         }
     }

@@ -3,9 +3,6 @@ package jeed.sixfix;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
-import net.minecraftforge.event.ForgeSubscribe;
-
-import java.io.File;
 
 public class SixFixConfig {
     public static Configuration config;

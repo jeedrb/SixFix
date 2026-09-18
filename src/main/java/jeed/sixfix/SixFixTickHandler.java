@@ -41,25 +41,26 @@ public class SixFixTickHandler implements ITickHandler {
         }
     }
 
-    private void invSwap(GuiContainer gui, int slot) {
-        Minecraft mc = Minecraft.getMinecraft();
+    private void invSwap(GuiContainer gui, int slot) { // simulating pressing a 1-9 key in a container with the custom keys
+        Minecraft theCraft = Minecraft.getMinecraft();
         try {
             net.minecraft.inventory.Slot hoverSlot = null;
             net.minecraft.inventory.Container container = null;
 
-            for (java.lang.reflect.Field f : GuiContainer.class.getDeclaredFields()) {
-                f.setAccessible(true);
-                if (hoverSlot == null && f.getType() == net.minecraft.inventory.Slot.class) {
-                    hoverSlot = (net.minecraft.inventory.Slot) f.get(gui);
+            for (java.lang.reflect.Field field : GuiContainer.class.getDeclaredFields()) {
+                field.setAccessible(true);
+                if (hoverSlot == null && field.getType() == net.minecraft.inventory.Slot.class) {
+                    hoverSlot = (net.minecraft.inventory.Slot) field.get(gui);
                 }
-                if (container == null && f.getType() == net.minecraft.inventory.Container.class) {
-                    container = (net.minecraft.inventory.Container) f.get(gui);
+                if (container == null && field.getType() == net.minecraft.inventory.Container.class) {
+                    container = (net.minecraft.inventory.Container) field.get(gui);
                 }
                 if (hoverSlot != null && container != null) break;
             }
 
             if (hoverSlot != null && container != null) {
-                mc.playerController.windowClick(container.windowId, hoverSlot.slotNumber, slot, 2, mc.thePlayer);
+                theCraft.playerController.windowClick(container.windowId, hoverSlot.slotNumber, slot, 2, theCraft.thePlayer);
+//                theCraft.thePlayer.inventory.onInventoryChanged();
             }
         } catch (Exception ignored) {}
     }
@@ -71,7 +72,7 @@ public class SixFixTickHandler implements ITickHandler {
 
     @Override
     public String getLabel() {
-        return "FiveFixTick";
+        return "SixFixTick";
     }
 
 }

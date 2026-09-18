@@ -17,7 +17,9 @@ public class SixFixClientProxy extends SixFixCommonProxy {
     }
 
     public static KeyBinding[] hotbarBinds = new KeyBinding[9]; // hotbar bind array
-    public static KeyBinding bindF5, bindF3, bindArmor; // perspective and debug binds
+    public static KeyBinding bindF5, bindF3, bindArmor, bindPickBetter; // util keybinds
+
+    // REMOVE THE CUSTOM PICK BLOCK KEYBIND AT SOME POINT AND MAKE IT JUST USE THE NORMAL THING
 
     @Override
     public void hi(FMLPreInitializationEvent event) {
@@ -38,8 +40,9 @@ public class SixFixClientProxy extends SixFixCommonProxy {
         bindF5 = new KeyBinding("Perspective", 63); // F5
         bindF3 = new KeyBinding("Debug Overlay", 61); // F3
         bindArmor = new KeyBinding("Armor Toggle", 62); // F4
+        bindPickBetter = new KeyBinding("Better Pick Block", 56); // -98 M3 or 56 LALT
 
-        KeyBinding[] utilBinds = {bindF5, bindF3, bindArmor};
+        KeyBinding[] utilBinds = {bindF5, bindF3, bindArmor, bindPickBetter};
         KeyBindingRegistry.instance().registerKeyBinding(new SixFixUtilKeyHandler(utilBinds));
 
         MinecraftForge.EVENT_BUS.register(new SixFixSoundHandler());
