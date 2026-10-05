@@ -13,11 +13,6 @@ public class SixFixTickHandler implements ITickHandler {
 
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
-        // nothing ig
-    }
-
-    @Override
-    public void tickEnd(EnumSet<TickType> type, Object... tickData) {
         Minecraft theCraft = Minecraft.getMinecraft();
 
         // check if an inventory/container gui is open
@@ -41,6 +36,31 @@ public class SixFixTickHandler implements ITickHandler {
         }
     }
 
+    @Override
+    public void tickEnd(EnumSet<TickType> type, Object... tickData) {
+//        Minecraft theCraft = Minecraft.getMinecraft();
+//
+//        // check if an inventory/container gui is open
+//        if (theCraft.thePlayer != null && theCraft.currentScreen instanceof GuiContainer) {
+//            GuiContainer currentGui = (GuiContainer) theCraft.currentScreen;
+//
+//            for (int i = 0; i < 9; i++) {
+//                int keyCode = SixFixClientProxy.hotbarBinds[i].keyCode; // get the custom bound keycode
+//
+//                if (Keyboard.isKeyDown(keyCode)) {
+//                    if (!isDown[i]) {
+//                        if (!(keyCode >= 2 && keyCode <= 10))
+//                            invSwap(currentGui, i);
+//
+//                        isDown[i] = true;
+//                    }
+//                } else {
+//                    isDown[i] = false;
+//                }
+//            }
+//        }
+    }
+
     private void invSwap(GuiContainer gui, int slot) { // simulating pressing a 1-9 key in a container with the custom keys
         Minecraft theCraft = Minecraft.getMinecraft();
         try {
@@ -60,9 +80,10 @@ public class SixFixTickHandler implements ITickHandler {
 
             if (hoverSlot != null && container != null) {
                 theCraft.playerController.windowClick(container.windowId, hoverSlot.slotNumber, slot, 2, theCraft.thePlayer);
-//                theCraft.thePlayer.inventory.onInventoryChanged();
+
             }
         } catch (Exception ignored) {}
+
     }
 
     @Override
