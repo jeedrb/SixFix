@@ -57,6 +57,7 @@ public class SixFixPickBlock {
         InventoryPlayer inventory = steve.inventory;
 
         // HANDLE EXCEPTIONS WHERE BLOCK ID DOESN'T MATCH ITEM ID
+        // maybe move to a function, it's getting long
         switch (targetID) {
             case 59: // wheat seeds block
                 targetID = 295; // wheat seeds item
@@ -72,6 +73,7 @@ public class SixFixPickBlock {
                 break;
             case 83: // sugar cane block
                 targetID = 338; // sugar cane item
+                targetMeta = 0;
                 break;
             case 144: // skull block
                 targetID = 397; // skull item, DON'T CLEAR targetMeta since the different skulls use that
