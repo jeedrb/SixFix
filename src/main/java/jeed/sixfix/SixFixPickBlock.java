@@ -89,7 +89,11 @@ public class SixFixPickBlock {
             case 120: // end portal frame block, block and item IDs are already the same but need to clear targetMeta
                 targetMeta = 0;
                 break;
+            case 6: // saplings, block and item ID are the same, but you have to modulo 4 the metadata because it grows in an insane way
+                targetMeta = targetMeta % 4; // the item ID for obtainable saplings will always be 0-3, but grown saplings intermingle 0-11
+                break;
         }
+
 
 
         if (inventory.getCurrentItem() != null) { // simple check for if you're already holding what you need
