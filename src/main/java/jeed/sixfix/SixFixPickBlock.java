@@ -57,7 +57,7 @@ public class SixFixPickBlock {
     }
 
     private static void pickEntity(MovingObjectPosition target) {
-        int targetID = 0, targetMeta = 0; // safe defaults ig
+        int targetID = 0; // safe default ig
 
         // can't use switch case for this :/
         if (target.entityHit instanceof EntityLiving) { // living
@@ -86,7 +86,7 @@ public class SixFixPickBlock {
             }
         }
 
-        hotbarSearch(targetID, targetMeta);
+        hotbarSearch(targetID, 0);
     }
 
     private static void hotbarSearch(int targetID, int targetMeta) {
@@ -120,30 +120,15 @@ public class SixFixPickBlock {
                 targetID = 355; // bed item
                 targetMeta = 0;
                 break;
-            case 68: // sign block
+            case 68: // wall sign block
+            case 63: // floor sign block
                 targetID = 323; // sign item
                 targetMeta = 0;
                 break;
-            case 120: // end portal frame block, block and item IDs are already the same but need to clear targetMeta
-                targetMeta = 0;
-                break;
             case 6: // saplings, block and item ID are the same, but you have to modulo 4 the metadata because it grows in an insane way
-                targetMeta %= 4; // the item ID for obtainable saplings will always be 0-3, but grown saplings intermingle 0-11
-                break;
-            case 50: // torch block has orientation meta
-                targetMeta = 0; // torch item has damage 0
-                break;
-            case 76: // redstone torch block has orientation meta
-                targetMeta = 0; // redstone torch item has damage 0
-                break;
-            case 75: // unlit redstone torch
-                targetMeta = 0; // remove rotation
-                break;
-            case 66: // rail block has meta/rotations
-                targetMeta = 0; // remove meta/rotation to match item
-                break;
-            case 27: // powered rail block has meta/rotation
-                targetMeta = 0; // remove meta/rotation to match item
+            case 17: // same for logs
+            case 18: // and same for leaves
+                targetMeta %= 4; // the item ID for obtainable saplings/logs/leaves will always be 0-3, but grown/natural intermingle 0-11
                 break;
             case 140: // flower pot block
                 targetID = 390; // flower pot item
@@ -157,9 +142,17 @@ public class SixFixPickBlock {
                 targetID = 330; // iron door item
                 targetMeta = 0; // remove rotation/orientation/state
                 break;
+            case 33: // sticky piston block/item
+            case 29: // piston block/item
+            case 120: // end portal frame
+            case 50: // torch block
+            case 76: // redstone torch block
+            case 75: // unlit redstone torch
+            case 66: // rail block
+            case 27: // powered rail block
+            case 28: // detector rail block
+            case 157: // activator rail
             case 96: // trapdoor block/item
-                targetMeta = 0; // remove rotation/orientation/state
-                break;
             case 53: // oak stairs block/item
             case 67: // cobblestone stairs block/item
             case 108: // brick stairs block/item
@@ -170,11 +163,7 @@ public class SixFixPickBlock {
             case 135: // birch stairs block/item
             case 136: // jungle stairs block/item
             case 156: // quartz stairs block/item
-                targetMeta = 0; // remove rotation
-                break;
             case 107: // fence gate block
-                targetMeta = 0; // remove rotation/state
-                break;
             case 143: // wooden button block/item
             case 77: // stone button block/item
             case 70: // stone pressure plate block/item
@@ -195,10 +184,6 @@ public class SixFixPickBlock {
                 break;
             case 124: // lit redstone lamp block/item
                 targetID = 123; // unlit redstone lamp block/item
-                break;
-            case 33: // sticky piston block/item
-            case 29: // piston block/item
-                targetMeta = 0; // remove rotation/state
                 break;
             case 34: // piston extension block
                 if (targetMeta <= 5) {
@@ -221,12 +206,28 @@ public class SixFixPickBlock {
                 targetID = 287; // string item
                 targetMeta = 0; // remove state
                 break;
+            case 65: // ladder block/item
+            case 78: // snow (layer) block/item
+            case 106: // vine block/item
+            case 54: // chest block/item
+            case 146: // trapped chest block/item
+            case 130: // ender chest
+                targetMeta = 0;
+                break;
+            case 61: // furnace block/item
+            case 62: // lit furnace block
+                targetID = 61; // change to unlit furnace
+                targetMeta = 0; // rotation
+                break;
+            case 145: // anvil block/item
+                targetMeta = -1; // -1 is for ignoring metadata in search
+                break;
         }
 
 
 
         if (inventory.getCurrentItem() != null) { // simple check for if you're already holding what you need
-            if (inventory.getCurrentItem().itemID == targetID && inventory.getCurrentItem().getItemDamage() == targetMeta) {
+            if (inventory.getCurrentItem().itemID == targetID && (inventory.getCurrentItem().getItemDamage() == targetMeta || targetMeta == -1)) {
 //                System.out.println("have you tried looking down");
                 return;
             }
@@ -236,7 +237,7 @@ public class SixFixPickBlock {
         for (int i = 0; i < 9; i++) {
             if (inventory.getStackInSlot(i) == null) continue; // skip if hotbar slot empty
 
-            if (inventory.getStackInSlot(i).itemID == targetID && inventory.getStackInSlot(i).getItemDamage() == targetMeta) {
+            if (inventory.getStackInSlot(i).itemID == targetID && (inventory.getStackInSlot(i).getItemDamage() == targetMeta || targetMeta == -1)) {
 //                System.out.println("Item " + targetID + " found in slot " + i);
                 inventory.currentItem = i; // change to the correct item slot if item found in hotbar
                 return;
@@ -256,7 +257,7 @@ public class SixFixPickBlock {
         for (int i = 9; i < 36; i++) {
             if (inventory.getStackInSlot(i) == null) continue; // skip if inv slot empty
 
-            if (inventory.getStackInSlot(i).itemID == targetID && inventory.getStackInSlot(i).getItemDamage() == targetMeta) {
+            if (inventory.getStackInSlot(i).itemID == targetID && (inventory.getStackInSlot(i).getItemDamage() == targetMeta || targetMeta == -1)) {
 //                System.out.println("Item " + targetID + " found in slot " + i);
                 itemSwap(getSwappingSlot(), i);
                 return;

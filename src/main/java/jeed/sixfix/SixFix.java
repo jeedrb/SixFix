@@ -7,7 +7,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import java.util.logging.Logger;
 
-@Mod(modid = "sixfix", name = "SixFix", version = "0.7.1")
+@Mod(modid = "sixfix", name = "SixFix", version = "0.7.2")
 public class SixFix {
     public static final Logger LOGGER = Logger.getLogger("sixfix");
 
