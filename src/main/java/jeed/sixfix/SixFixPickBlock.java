@@ -217,7 +217,10 @@ public class SixFixPickBlock {
                 targetID = 404; // comparator item
                 targetMeta = 0; // remove rotation/state
                 break;
-
+            case 132: // string block
+                targetID = 287; // string item
+                targetMeta = 0; // remove state
+                break;
         }
 
 
