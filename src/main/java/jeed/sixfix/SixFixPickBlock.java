@@ -2,6 +2,7 @@ package jeed.sixfix;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.item.*;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet102WindowClick;
@@ -35,7 +36,7 @@ public class SixFixPickBlock {
 //        ForgeHooks.onPickBlock(target, steve, theCraft.theWorld);
 
         if (target.typeOfHit == EnumMovingObjectType.ENTITY) {
-//            pickEntity(); // minecarts, boats, paintings, item frames, etc
+            pickEntity(target); // minecarts, boats, paintings, item frames, etc
 //            System.out.println("entity!");
             return;
         }
@@ -52,9 +53,30 @@ public class SixFixPickBlock {
 
     }
 
-//    private static void pickEntity() {
-//
-//    }
+    private static void pickEntity(MovingObjectPosition target) {
+        int targetID = 0, targetMeta = 0; // safe defaults ig
+
+        // can't use switch case for this :/
+        if (target.entityHit instanceof EntityMinecartEmpty) {
+            targetID = 328; // minecart item
+        } else if (target.entityHit instanceof EntityBoat) {
+            targetID = 333; // boat item
+        } else if (target.entityHit instanceof EntityMinecartChest) {
+            targetID = 342; // minecart chest item
+        } else if (target.entityHit instanceof EntityMinecartFurnace) {
+            targetID = 343; // minecart furnace item
+        } else if (target.entityHit instanceof EntityMinecartTNT) {
+            targetID = 407; // minecart tnt item
+        } else if (target.entityHit instanceof EntityMinecartHopper) {
+            targetID = 408; // minecart hopper item
+        } else if (target.entityHit instanceof EntityPainting) {
+            targetID = 321; // painting item
+        } else if (target.entityHit instanceof EntityItemFrame) {
+            targetID = 389; // item frame item
+        }
+
+        hotbarSearch(targetID, targetMeta);
+    }
 
     private static void hotbarSearch(int targetID, int targetMeta) {
         Minecraft theCraft = Minecraft.getMinecraft();
@@ -97,12 +119,23 @@ public class SixFixPickBlock {
             case 6: // saplings, block and item ID are the same, but you have to modulo 4 the metadata because it grows in an insane way
                 targetMeta %= 4; // the item ID for obtainable saplings will always be 0-3, but grown saplings intermingle 0-11
                 break;
-            case 50: // torch block has a meta of 5
+            case 50: // torch block has orientation meta
                 targetMeta = 0; // torch item has damage 0
                 break;
-            case 76: // redstone torch block has a meta of 5
+            case 76: // redstone torch block has orientation meta
                 targetMeta = 0; // redstone torch item has damage 0
                 break;
+            case 66: // rail block has meta/rotations
+                targetMeta = 0; // remove meta/rotation to match item
+                break;
+            case 27: // powered rail block has meta/rotation
+                targetMeta = 0; // remove meta/rotation to match item
+                break;
+            case 140: // flower pot block
+                targetID = 390; // flower pot item
+                targetMeta = 0; // remove metadata from inserted flower
+                break;
+
         }
 
 
