@@ -2,7 +2,10 @@ package jeed.sixfix;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.*;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet102WindowClick;
@@ -57,22 +60,30 @@ public class SixFixPickBlock {
         int targetID = 0, targetMeta = 0; // safe defaults ig
 
         // can't use switch case for this :/
-        if (target.entityHit instanceof EntityMinecartEmpty) {
-            targetID = 328; // minecart item
-        } else if (target.entityHit instanceof EntityBoat) {
-            targetID = 333; // boat item
-        } else if (target.entityHit instanceof EntityMinecartChest) {
-            targetID = 342; // minecart chest item
-        } else if (target.entityHit instanceof EntityMinecartFurnace) {
-            targetID = 343; // minecart furnace item
-        } else if (target.entityHit instanceof EntityMinecartTNT) {
-            targetID = 407; // minecart tnt item
-        } else if (target.entityHit instanceof EntityMinecartHopper) {
-            targetID = 408; // minecart hopper item
-        } else if (target.entityHit instanceof EntityPainting) {
-            targetID = 321; // painting item
-        } else if (target.entityHit instanceof EntityItemFrame) {
-            targetID = 389; // item frame item
+        if (target.entityHit instanceof EntityLiving) { // living
+            if (target.entityHit instanceof EntityWolf) {
+                targetID = 352; // bone item
+            } else if (target.entityHit instanceof EntityOcelot) {
+                targetID = 349; // raw fish item
+            }
+        } else { // nonliving
+            if (target.entityHit instanceof EntityMinecartEmpty) {
+                targetID = 328; // minecart item
+            } else if (target.entityHit instanceof EntityBoat) {
+                targetID = 333; // boat item
+            } else if (target.entityHit instanceof EntityMinecartChest) {
+                targetID = 342; // minecart chest item
+            } else if (target.entityHit instanceof EntityMinecartFurnace) {
+                targetID = 343; // minecart furnace item
+            } else if (target.entityHit instanceof EntityMinecartTNT) {
+                targetID = 407; // minecart tnt item
+            } else if (target.entityHit instanceof EntityMinecartHopper) {
+                targetID = 408; // minecart hopper item
+            } else if (target.entityHit instanceof EntityPainting) {
+                targetID = 321; // painting item
+            } else if (target.entityHit instanceof EntityItemFrame) {
+                targetID = 389; // item frame item
+            }
         }
 
         hotbarSearch(targetID, targetMeta);
@@ -125,6 +136,9 @@ public class SixFixPickBlock {
             case 76: // redstone torch block has orientation meta
                 targetMeta = 0; // redstone torch item has damage 0
                 break;
+            case 75: // unlit redstone torch
+                targetMeta = 0; // remove rotation
+                break;
             case 66: // rail block has meta/rotations
                 targetMeta = 0; // remove meta/rotation to match item
                 break;
@@ -134,6 +148,74 @@ public class SixFixPickBlock {
             case 140: // flower pot block
                 targetID = 390; // flower pot item
                 targetMeta = 0; // remove metadata from inserted flower
+                break;
+            case 64: // door block
+                targetID = 324; // door item
+                targetMeta = 0; // remove rotation/orientation/state
+                break;
+            case 71: // iron door block
+                targetID = 330; // iron door item
+                targetMeta = 0; // remove rotation/orientation/state
+                break;
+            case 96: // trapdoor block/item
+                targetMeta = 0; // remove rotation/orientation/state
+                break;
+            case 53: // oak stairs block/item
+            case 67: // cobblestone stairs block/item
+            case 108: // brick stairs block/item
+            case 109: // stone brick stairs block/item
+            case 114: // nether brick stairs block/item
+            case 128: // sandstone stairs block/item
+            case 134: // spruce stairs block/item
+            case 135: // birch stairs block/item
+            case 136: // jungle stairs block/item
+            case 156: // quartz stairs block/item
+                targetMeta = 0; // remove rotation
+                break;
+            case 107: // fence gate block
+                targetMeta = 0; // remove rotation/state
+                break;
+            case 143: // wooden button block/item
+            case 77: // stone button block/item
+            case 70: // stone pressure plate block/item
+            case 72: // wooden pressure plate block/item
+            case 147: // gold pressure plate block/item
+            case 148: // iron pressure plate block/item
+            case 69: // lever block/item
+            case 131: // tripwire hook block/item
+            case 151: // daylight detector block/item
+            case 154: // hopper block/item
+            case 23: // dispenser block/item
+            case 158: // dropper block/item
+                targetMeta = 0;
+                break;
+            case 55: // redstone dust block
+                targetID = 331; // redstone dust item
+                targetMeta = 0; // remove power
+                break;
+            case 124: // lit redstone lamp block/item
+                targetID = 123; // unlit redstone lamp block/item
+                break;
+            case 33: // sticky piston block/item
+            case 29: // piston block/item
+                targetMeta = 0; // remove rotation/state
+                break;
+            case 34: // piston extension block
+                if (targetMeta <= 5) {
+                    targetID = 33; // piston block/item
+                } else {
+                    targetID = 29; // sticky piston block/item
+                }
+                targetMeta = 0; // remove rotation
+                break;
+            case 93: // unlit repeater block
+            case 94: // lit repeater block
+                targetID = 356; // repeater item
+                targetMeta = 0; // remove rotation/state
+                break;
+            case 149: // comparator block
+                targetID = 404; // comparator item
+                targetMeta = 0; // remove rotation/state
                 break;
 
         }
