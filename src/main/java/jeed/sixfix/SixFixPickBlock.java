@@ -142,16 +142,19 @@ public class SixFixPickBlock {
                 targetID = 330; // iron door item
                 targetMeta = 0; // remove rotation/orientation/state
                 break;
+            case 75: // unlit redstone torch block
+                targetID = 76; // redstone torch item
+                targetMeta = 0;
+                break;
             case 33: // sticky piston block/item
             case 29: // piston block/item
-            case 120: // end portal frame
-            case 50: // torch block
-            case 76: // redstone torch block
-            case 75: // unlit redstone torch
-            case 66: // rail block
-            case 27: // powered rail block
-            case 28: // detector rail block
-            case 157: // activator rail
+            case 120: // end portal frame block/item
+            case 50: // torch block/item
+            case 76: // redstone torch block/item
+            case 66: // rail block/item
+            case 27: // powered rail block/item
+            case 28: // detector rail block/item
+            case 157: // activator rail block/item
             case 96: // trapdoor block/item
             case 53: // oak stairs block/item
             case 67: // cobblestone stairs block/item
