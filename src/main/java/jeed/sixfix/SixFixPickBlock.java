@@ -35,6 +35,7 @@ public class SixFixPickBlock {
 //        ForgeHooks.onPickBlock(target, steve, theCraft.theWorld);
 
         if (target.typeOfHit == EnumMovingObjectType.ENTITY) {
+//            pickEntity(); // minecarts, boats, paintings, item frames, etc
 //            System.out.println("entity!");
             return;
         }
@@ -50,6 +51,10 @@ public class SixFixPickBlock {
         hotbarSearch(targetID, targetMeta);
 
     }
+
+//    private static void pickEntity() {
+//
+//    }
 
     private static void hotbarSearch(int targetID, int targetMeta) {
         Minecraft theCraft = Minecraft.getMinecraft();
@@ -90,7 +95,13 @@ public class SixFixPickBlock {
                 targetMeta = 0;
                 break;
             case 6: // saplings, block and item ID are the same, but you have to modulo 4 the metadata because it grows in an insane way
-                targetMeta = targetMeta % 4; // the item ID for obtainable saplings will always be 0-3, but grown saplings intermingle 0-11
+                targetMeta %= 4; // the item ID for obtainable saplings will always be 0-3, but grown saplings intermingle 0-11
+                break;
+            case 50: // torch block has a meta of 5
+                targetMeta = 0; // torch item has damage 0
+                break;
+            case 76: // redstone torch block has a meta of 5
+                targetMeta = 0; // redstone torch item has damage 0
                 break;
         }
 
@@ -103,7 +114,7 @@ public class SixFixPickBlock {
             }
         }
 
-        // searching hotbar for item
+        // searching hotbar for items
         for (int i = 0; i < 9; i++) {
             if (inventory.getStackInSlot(i) == null) continue; // skip if hotbar slot empty
 
