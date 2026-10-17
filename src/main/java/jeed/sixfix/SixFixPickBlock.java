@@ -225,6 +225,15 @@ public class SixFixPickBlock {
             case 145: // anvil block/item
                 targetMeta = -1; // -1 is for ignoring metadata in search
                 break;
+            case 44: // slabs
+            case 126: // wood slabs
+                targetMeta %= 8; // does a similar thing to saplings/logs/leaves
+                break;
+            case 43: // double slabs
+            case 125: // double wood slabs
+                targetID += 1; // turn to single slabs
+                break;
+
         }
 
 
