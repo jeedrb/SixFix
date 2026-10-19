@@ -109,6 +109,14 @@ public class SixFixPickBlock {
                 targetID = 361; // pumpkin seeds item
                 targetMeta = 0;
                 break;
+            case 142: // potato block
+                targetID = 392; // potato item
+                targetMeta = 0;
+                break;
+            case 141: // carrot block
+                targetID = 391; // carrot item
+                targetMeta = 0;
+                break;
             case 83: // sugar cane block
                 targetID = 338; // sugar cane item
                 targetMeta = 0;
@@ -179,6 +187,12 @@ public class SixFixPickBlock {
             case 154: // hopper block/item
             case 23: // dispenser block/item
             case 158: // dropper block/item
+            case 65: // ladder block/item
+            case 78: // snow (layer) block/item
+            case 106: // vine block/item
+            case 54: // chest block/item
+            case 146: // trapped chest block/item
+            case 130: // ender chest
                 targetMeta = 0;
                 break;
             case 55: // redstone dust block
@@ -208,14 +222,6 @@ public class SixFixPickBlock {
             case 132: // string block
                 targetID = 287; // string item
                 targetMeta = 0; // remove state
-                break;
-            case 65: // ladder block/item
-            case 78: // snow (layer) block/item
-            case 106: // vine block/item
-            case 54: // chest block/item
-            case 146: // trapped chest block/item
-            case 130: // ender chest
-                targetMeta = 0;
                 break;
             case 61: // furnace block/item
             case 62: // lit furnace block
