@@ -5,6 +5,7 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
+import net.minecraft.util.ChatMessageComponent;
 
 public class SixFixCommandGui extends CommandBase {
 
@@ -33,6 +34,9 @@ public class SixFixCommandGui extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) {
+        Minecraft theCraft = Minecraft.getMinecraft();
+        GameSettings settings = theCraft.gameSettings;
+
         if (args.length == 1) { // check only one argument was passed
             try { // check if it's an integer
                 Integer.parseInt(args[0]);
@@ -41,16 +45,13 @@ public class SixFixCommandGui extends CommandBase {
 //                return;
             }
 
-            Minecraft theCraft = Minecraft.getMinecraft();
-            GameSettings settings = theCraft.gameSettings;
-
             settings.guiScale = Integer.parseInt(args[0]);
-
-            theCraft.gameSettings.saveOptions();
+            settings.saveOptions();
+            sender.sendChatToPlayer(ChatMessageComponent.createFromText("GUI Scale is now " + settings.guiScale));
 
 
         } else if (args.length == 0) {
-            throw new WrongUsageException("/guiSize [size]");
+            sender.sendChatToPlayer(ChatMessageComponent.createFromText("GUI Scale is currently " + settings.guiScale));
         } else {
             throw new WrongUsageException("/guiSize [size]");
         }
