@@ -7,6 +7,9 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.EnumOptions;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.command.ICommandManager;
+import net.minecraft.command.ServerCommandManager;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 
 public class SixFixClientProxy extends SixFixCommonProxy {
@@ -44,6 +47,8 @@ public class SixFixClientProxy extends SixFixCommonProxy {
 
         KeyBinding[] utilBinds = {bindF5, bindF3, bindArmor, bindPickBetter};
         KeyBindingRegistry.instance().registerKeyBinding(new SixFixUtilKeyHandler(utilBinds));
+
+
 
         MinecraftForge.EVENT_BUS.register(new SixFixSoundHandler());
         MinecraftForge.EVENT_BUS.register(new SixFixArmorRender());
