@@ -1,11 +1,14 @@
-Messy additions and bandaid fixes to Minecraft 1.6.4.
+Messy additions and bandaid fixes for Minecraft 1.6.4.
 
 Keybinds:
-- Hotbar
-- F3 (overlay)
-- F5
+- Hotbar (mirror: does not remove 1-9 functionality, but does not conflict either)
+- F3 (mirror, overlay only)
+- F5 (mirror)
 - Toggle Armor Visibility
 - Better Pick Block (works on items in your inventory!)
+
+Commands:
+- /guiSize to change the GUI Scale to values over 3
 
 Sounds:
 - Doors
