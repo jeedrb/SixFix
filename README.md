@@ -17,6 +17,6 @@ Sounds:
 - Et
 - Cetera
 
-built with [voldeloom](https://github.com/CrackedPolishedBlackstoneBricksMC/voldeloom), gradle 8.14.3, and openjdk 1.8.0_504-b01
+built with [voldeloom](https://github.com/CrackedPolishedBlackstoneBricksMC/voldeloom), gradle 8.14.3, and openjdk 11.0.32.1
 
 GPL3
