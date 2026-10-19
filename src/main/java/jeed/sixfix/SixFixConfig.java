@@ -1,6 +1,7 @@
 package jeed.sixfix;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.Property;
 
@@ -21,6 +22,11 @@ public class SixFixConfig {
 
     public static void toggleArmor() {
         hideArmorToggle = !hideArmorToggle;
+        // sometimes when going through portals or respawning, the cape will start showing even with the option off, so maybe this will be a way to refresh it
+        Minecraft.getMinecraft().gameSettings.showCape = !Minecraft.getMinecraft().gameSettings.showCape;
+        Minecraft.getMinecraft().gameSettings.saveOptions();
+        Minecraft.getMinecraft().gameSettings.showCape = !Minecraft.getMinecraft().gameSettings.showCape;
+        Minecraft.getMinecraft().gameSettings.saveOptions();
 
         Property prop = config.get("Armor", "Hide Player Armor", true);
         prop.set(hideArmorToggle);
