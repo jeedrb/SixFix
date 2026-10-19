@@ -11,16 +11,26 @@ buildscript {
 
 apply plugin: "agency.highlysuspect.voldeloom"
 
+
 java.toolchain.languageVersion = JavaLanguageVersion.of(11)
 compileJava.options.release.set(6)
 
 String minecraftVersion = "1.6.4"
 String forgeVersion = "1.6.4-9.11.1.1345"
+base.archivesName = project.modName
+version = project.modVersion
 
 dependencies {
 	minecraft "com.mojang:minecraft:${minecraftVersion}"
 	forge "net.minecraftforge:forge:${forgeVersion}:universal"
 	mappings "net.minecraftforge:forge:${forgeVersion}:src@zip"
+}
+
+def props = ['modName', 'modid', 'modVersion', 'modDescription', 'modAuthors', 'modDeps', 'minecraft', 'url']
+processResources {
+	filesMatching("mcmod.info") {
+		expand(project.properties.subMap(props))
+	}
 }
 
 tasks.withType(JavaExec).configureEach {
@@ -29,3 +39,20 @@ tasks.withType(JavaExec).configureEach {
 	}
 }
 
+//volde {
+//	runs {
+//		client {
+//			programArg "--username=JeedRB"
+//		}
+//	}
+//}
+
+processResources {
+	filesMatching("mcmod.info") {
+		expand(project.properties.subMap(props))
+	}
+
+//	filesMatching("SixFix.java") {
+//		filter(Replace)
+//	}
+}
